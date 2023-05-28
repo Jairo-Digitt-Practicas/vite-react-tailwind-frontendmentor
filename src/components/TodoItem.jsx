@@ -1,14 +1,22 @@
-import CrossIcon from "./icons/Crossicon";
+import IconCross from "./icons/IconCross";
+import IconCheck from "./icons/IconCheck";
 
-const TodoItem = () => { 
+const TodoItem = ({todo, removeTodo, updateTodo}) => { 
+  const {id, title, completed} = todo
+
     return (
         <article className="flex gap-4 border-b-gray-400 border-b-[1.5px]">
-          <button className="flex-none rounded-full border-2 w-5 h-5 inline-block"></button>
-          <p className="text-gray-600 grow">
-            Complete online JavaScript curse in bluuweb
+           <button className={`w-5 h-5 flex-none rounded-full border-2 ${completed ? "flex flex-none rounded-full border-2  bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 justify-center items-center" 
+              : "inline-block"}`}
+              onClick={() => updateTodo(id)}
+              >
+                    {completed && <IconCheck />}
+              </button>
+          <p className={`text-gray-600 grow ${completed && "line-through"}`}>
+            {title}
           </p>
-          <button className="flex-none">
-            <CrossIcon/>
+          <button className="flex-none" onClick={() => removeTodo(id)}>
+            <IconCross />
           </button>
         </article>
     )
